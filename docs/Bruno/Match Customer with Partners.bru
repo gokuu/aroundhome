@@ -1,0 +1,25 @@
+meta {
+  name: Match Customer with Partners
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/api/v1/customers/1/match-partners?page_number=2
+  body: json
+  auth: none
+}
+
+query {
+  page_number: 2
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "materials": ["wood"]
+  }
+}
