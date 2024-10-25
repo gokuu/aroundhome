@@ -18,6 +18,7 @@ This will attempt to pull all images, fail on the apps, build them, and then sta
     - `rails db:create`
     - `rails db:migrate`
     - `rails db:seed`
+  - The seeding script will create 100 partners and 100 customers using Faker to generate random data.
 
 Both the Rails backend and Setup Rails backend depend on Postgres being healthy, so it might take a few seconds before the healthcheck is positive.
 
