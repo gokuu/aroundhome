@@ -119,8 +119,8 @@ function App() {
           </aside>
         </main>
 
-        <aside className="col-start-1 col-span-3 row-start-3">
-          <PartnerPanel partner={selectedPartner} />
+        <aside className="grow flex items-stretch justify-stretch">
+          <PartnerPanel customer={selectedCustomer} partner={selectedPartner} />
         </aside>
       </main>
     </div>

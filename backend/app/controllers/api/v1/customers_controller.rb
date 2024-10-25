@@ -1,13 +1,18 @@
 module Api
   module V1
     class CustomersController < ApplicationController
-      before_action :set_customer, only: %i[match_partners]
+      before_action :set_customer, only: %i[show match_partners]
 
       # GET /api/v1/customers
       def index
         customers = Customer.all.order(:name)
 
         render_with_pagination customers, only: %i[id name]
+      end
+
+      # GET /api/v1/customers/:id
+      def show
+        render json: @customer
       end
 
       # GET /api/v1/customers/:id/match-partners

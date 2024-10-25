@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :customers, only: %i[index] do
+      resources :customers, only: %i[index show] do
         post "match-partners", to: "customers#match_partners", on: :member
       end
       resources :partners, only: %i[index show]

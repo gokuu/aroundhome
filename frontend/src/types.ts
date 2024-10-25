@@ -18,6 +18,16 @@ export interface Partner {
   distance: number;
 }
 
+export interface CustomerDetails extends Customer {
+  street_address: string;
+  postcode: string;
+  city: string;
+  country_code: string;
+  country: string;
+  latitude: number;
+  longitude: number;
+}
+
 export interface PartnerDetails extends Partner {
   materials: Materials[];
   street_address: string;
@@ -36,3 +46,9 @@ export type CustomersReponse = PaginatedResponse<Customer>;
 export type PartnersReponse = PaginatedResponse<Partner>;
 
 export type Materials = "wood" | "carpet" | "tiles";
+
+export interface Coordinate {
+  name?: string;
+  latitude: number;
+  longitude: number;
+}

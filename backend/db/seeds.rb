@@ -13,8 +13,8 @@ require 'faker'
 Partner.destroy_all
 
 # These values are used to place all the points roughly inside Germany
-LATITUDE_RANGE = 6.284053..14.014530
-LONGITUDE_RANGE = 47.638179..53.590240
+LATITUDE_RANGE = 47.638179..53.590240
+LONGITUDE_RANGE = 6.284053..14.014530
 
 def random_latitude
   Faker::Number.within range: LATITUDE_RANGE
