@@ -7,6 +7,7 @@ class CreateCustomers < ActiveRecord::Migration[7.2]
       t.string :postcode, null: false
       t.string :city, null: false
       t.string :country_code, null: false
+      t.string :country, null: false
       t.float :latitude, default: 0.0, null: false
       t.float :longitude, default: 0.0, null: false
 

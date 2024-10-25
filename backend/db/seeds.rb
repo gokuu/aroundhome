@@ -24,9 +24,9 @@ def random_longitude
   Faker::Number.within range: LONGITUDE_RANGE
 end
 
-1000.times do |i|
+100.times do |i|
   Partner.create! do |p|
-    address = Faker::Address.full_address_as_hash(:full_address, :postcode, :city, :country_code)
+    address = Faker::Address.full_address_as_hash(:full_address, :postcode, :city, :country_code, :country)
 
     p.name = Faker::Company.unique.name
 
@@ -38,6 +38,7 @@ end
     p.postcode = address[:postcode]
     p.city = address[:city]
     p.country_code = address[:country_code]
+    p.country = address[:country]
     p.latitude = random_latitude
     p.longitude = random_longitude
     p.operating_radius = Faker::Number.within(range: 10.0e3..1000.0e3) # metres
@@ -49,9 +50,9 @@ end
 # Min ,
 # Max ,
 
-1000.times do |i|
+100.times do |i|
   Customer.create! do |c|
-    address = Faker::Address.full_address_as_hash(:full_address, :postcode, :city, :country_code)
+    address = Faker::Address.full_address_as_hash(:full_address, :postcode, :city, :country_code, :country)
 
     c.name = Faker::Name.unique.name
 
@@ -59,6 +60,7 @@ end
     c.postcode = address[:postcode]
     c.city = address[:city]
     c.country_code = address[:country_code]
+    c.country = address[:country]
     c.latitude = random_latitude
     c.longitude = random_longitude
   end

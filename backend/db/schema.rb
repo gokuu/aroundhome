@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_24_160853) do
     t.string "postcode", null: false
     t.string "city", null: false
     t.string "country_code", null: false
+    t.string "country", null: false
     t.float "latitude", default: 0.0, null: false
     t.float "longitude", default: 0.0, null: false
     t.datetime "created_at", null: false
@@ -34,6 +35,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_24_160853) do
     t.string "postcode", null: false
     t.string "city", null: false
     t.string "country_code", null: false
+    t.string "country", null: false
     t.float "latitude", default: 0.0, null: false
     t.float "longitude", default: 0.0, null: false
     t.float "operating_radius", default: 0.0, null: false
