@@ -3,10 +3,56 @@ volumes:
   postgres-data:
 
 services:
+
+  setup-backend: &setup-backend
+    image: aroundhome-api:tech-challenge
+    build:
+      context: backend
+    environment:
+      RAILS_ENV: development
+      SECRET_KEY_BASE: awesome-secret-password
+      DATABASE_USER: "around-home"
+      DATABASE_PASSWORD: "around-home"
+      DATABASE_HOST: "postgres"
+      DATABASE_PORT: "5432"
+      DATABASE_NAME: "around-home"
+    command:
+      - ./bin/rails
+      - db:create
+      - db:migrate
+      - db:seed
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  backend:
+    <<: *setup-backend
+    command:
+      - ./bin/rails
+      - server
+      - -b
+      - 0.0.0.0
+    ports:
+      - 3000:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      setup-backend:
+        condition: service_completed_successfully
+
+
+  frontend:
+    image: aroundhome-frontend:tech-challenge
+    build:
+      context: frontend
+      args:
+        - VITE_API_URL=http://localhost:3000/api/v1
+    ports:
+      - 5173:80
+
   postgres:
     restart: unless-stopped
     image: postgres:alpine
-    container_name: postgres
     environment:
       POSTGRES_DB: "around-home"
       POSTGRES_USER: "around-home"
@@ -16,10 +62,14 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data:Z
       - ./docker/postgres-init-scripts:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U around-home"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   adminer:
     image: adminer:latest
-    container_name: adminer
     restart: unless-stopped
     ports:
       - 8080:8080
